@@ -1,0 +1,60 @@
+<!-- MUHAMMAD IVAN CHRIANA - JABAR CODING CAMP -->
+<!-- SOAL KE 1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas Form Input Binding dan Validation</title>
+</head>
+<body>
+  <div id="app">
+    <form>
+        <input type="text" v-model="cari" placeholder="Cari">
+        <ul>
+            <li v-for="item in cariData" :key="item.id">
+                {{ item.title }} 
+            </li>
+        </ul>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+   var vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+            cari:"",
+            books: [],
+        };
+      },
+      created() {
+          this.books = [
+              { title: "Introduction to Algorithms"},
+              { title: "Lancar Java dan Javascript"},
+              { title: "7 in 1 Pemrograman Web Untuk Pemula"},
+              { title: "Belajar Pemrograman dan Hacking Menggunakan Python"},
+              { title: "Design and Build Website"},
+              { title: "Elements of Reusable Object-Oriented Software"},
+              { title: "The Pragmatic Programmer"},
+              { title: "A Modern Introduction to Programming"},
+              { title: "Kisah B.J Habibie"},
+              { title: "Kisah Hidup Nabi Muhammad SAW"},
+              { title: "Cinta di atas awan"},
+              { title: "Cara Bersikap Bodo Amat"},
+              { title: "Manusia Setengah Dewa"}
+          ];
+      },
+      computed: {
+          cariData() {
+              return this.books.filter((item) => {
+                return item.title.match(this.cari);
+              });
+          }
+      }
+  })
+  </script>
+</body>
+</html>
