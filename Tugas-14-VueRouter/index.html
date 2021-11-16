@@ -1,0 +1,60 @@
+<!-- MUHAMMAD IVAN CHRIANA - JABAR DICODING CAMP -->
+<!-- HARAP JALANKAN DI MICROSOFT EDGE -->
+<!-- MENGGUNAKAN OPEN LIVE SERVER -->
+<!-- SOAL KE 1 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>SELAMAT DATANG DI WEB Ivan</h1>
+      <!-- Pengganti tag <a href=""></a>  -->
+      <router-link to="/">Halaman1</router-link>
+      <router-link to="/about">Halaman 2</router-link>
+      <router-link to="/categories">Halaman 3</router-link>
+
+      <!-- Untuk Menampilkan component secara dinamis , sesuai dengan route yang diakses -->
+      <router-view></router-view>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script type="module">
+      import { CategoriesComponent } from "./CategoriesComponent.js";
+      import { CategoryComponent } from "./CategoryComponent.js";
+      const Home = { template: "<div>Ini Halaman Home</div>" };
+      const About = { template: "<div>Ini Halaman About</div>" };
+      const routes = [
+        { path: "/", component: Home, alias: "/home" },
+        { path: "/about", component: About },
+        { path: "*", redirect: "/" },
+        { path: "/category/:id", component: CategoryComponent },
+        { path: "/categories", component: CategoriesComponent, meta: { login: true } },
+      ];
+      const router = new VueRouter({
+        routes,
+      });
+
+      router.beforeEach((to, from, next) => {
+        if (to.matched.some((record) => record.meta.login)) {
+          let auth = true; // UBAH KE FALSE JIKA INGIN MENJADI TIDAK LOGIN
+          if (!auth) {
+            alert("halaman ini hanya user yang sudah login");
+            next(false);
+          } else {
+            next();
+            alert("berhasil masuk");
+          }
+        } else next();
+      });
+      var vm = new Vue({
+        el: "#app",
+        router,
+      });
+    </script>
+  </body>
+</html>
