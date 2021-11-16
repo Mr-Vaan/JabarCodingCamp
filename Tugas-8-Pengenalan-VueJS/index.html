@@ -1,0 +1,44 @@
+<!-- MUHAMMAD IVAN CHRIANA - JABAR CODING CAMP -->
+<!-- SOAL KE 1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{ fullName }}
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+   var vm = new Vue({
+      el: '#app',
+      data: {
+        firstName : 'Tuanku',
+        lastName : 'Imam Bonjol'
+      },
+      computed : {
+        fullName :{
+          get(){
+            return `${this.firstName} ${this.lastName}`
+          },
+          set(params){
+            let arr = params.split(' ')
+            this.firstName = arr[0]
+            this.lastName = arr[1] + " " + arr[2]
+          }
+        }
+      },
+      methods : {
+      }
+  })
+  </script>
+</body>
+</html>
+ 
+<!-- Isilah function get() pada fullName yang menggabungkan antara firstName dan lastName dan pisahkan antara firstName dan lastName dengan 1 spasi, sehingga muncul pada browser : Tuanku Imam Bonjol.
+Kemudian isilah kode di dalam function set() pada fullName , sehingga ketika pada tab console browser kita mengetik vm.fullName = "Abdul Haris Nasution" , maka secara reaktif tampilan di browser berubah menjadi : Abdul Haris Nasution -->
