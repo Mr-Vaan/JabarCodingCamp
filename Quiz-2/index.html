@@ -1,0 +1,76 @@
+<!-- MUHAMMAD IVAN CHRIANA - JABAR  CODING CAMP -->
+<!-- QUIZ-2 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz-2 Muhammad Ivan Chriana</title>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <h1>Masukkan Nama Atau Ubah Nama :</h1>
+
+      <div v-if="!isEditing">
+        <input placeholder="Silahkan Masukan" type="text" v-model="param" />
+        <input type="submit" value="Tambah" @click="storeTodo" />
+      </div>
+      <div v-else>
+        <input placeholder="Silahkan Masukan" type="text" v-model="param" />
+        <input type="submit" value="Update" @click="updateTodo" />
+      </div>
+
+      <ul>
+        <li v-for="(param, index) in params">
+          {{ param }} 
+          <button @click="editTodo(index, param)">Ubah</button>
+          <span> | </span>
+          <button @click="removeTodo(index)">Hapus</button>
+        </li>
+        
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+
+        data: {
+          isEditing: false,
+          param: "",
+          params: ["Van", "Ivan", "Pan", "Ipan"],
+          selectedTodo: null,
+        },
+
+        methods: {
+          storeTodo() {
+            this.params.push(this.param);
+            this.param = "";
+          },
+
+          removeTodo(index) {
+            this.index = confirm("Are You SURE?");
+            if (this.index == true) {
+              this.params.splice(index, 1);
+            } else {
+              alert("Don't Delete");
+            }
+          },
+
+          updateTodo() {
+            this.params.splice(this.selectedIndex, 1, this.param);
+            this.param = "";
+            this.isEditing = false;
+          },
+
+          editTodo(index, param) {
+            this.isEditing = true;
+            this.param = param;
+            this.selectedIndex = index;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
